@@ -1,13 +1,20 @@
+import { useState } from 'react'
+import EmoteButtons from './subs/EmoteButtons'
+import QuickTags from './subs/QuickTags'
 import Tag from './subs/Tag'
 
 export default function Editor() {
+    const [tags, setTags] = useState<string[]>([]);
+
   return (
-    <div className='w-1/3 h-screen pl-2 pt-2'>
+    <div className='w-5/12 h-screen p-12'>
         <form className='flex flex-col gap-2 h-full overflow-hidden'>
-            <Tag />
-            <textarea name="text-area" id="txt" className='w-full min-h-screen p-2 border-none outline-none' placeholder='Write Your Thoughts...'>
+            <Tag tags={tags} setTags={setTags} />
+            <textarea name="text-area" id="txt" className='w-full min-h-80 p-2 border-none outline-none' placeholder='Write Your Thoughts...'>
 
             </textarea>
+            <QuickTags setTags={setTags}/>
+            <EmoteButtons />
         </form>
         
     </div>

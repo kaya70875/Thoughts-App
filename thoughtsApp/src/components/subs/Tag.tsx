@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
-export default function Tag() {
-  const [tags, setTags] = useState<string[]>([]);
+export default function Tag({tags, setTags}: {tags: string[], setTags: React.Dispatch<React.SetStateAction<string[]>>}) {
+  
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleAddTag = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -25,11 +25,11 @@ export default function Tag() {
     <div className="w-2/4">
       <input
         type="text"
-        className="bg-transparent border-none outline-none p-2 placeholder-white"
-        placeholder="ADD A TAG"
+        className="bg-transparent border-none outline-none p-2 placeholder-black"
+        placeholder="Tags..."
         ref={inputRef}
       />
-      <button onClick={handleAddTag}>Add</button>
+      <button onClick={handleAddTag}></button>
       <div className="flex gap-2 p-2">
         {tags.map((tag, index) => (
           <div
