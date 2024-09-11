@@ -15,7 +15,7 @@ export default function EmoteButtons() {
           {module.map((emoteImage, index) => (
             <button
               key={emotes[index]}
-              className="bg-primaryButton flex items-center justify-center text-center w-14 h-14 rounded-full"
+              className="flex items-center justify-center text-center w-14 h-14 rounded-full"
             >
               <img src={emoteImage} alt={emotes[index]} />
             </button>

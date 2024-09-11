@@ -2,6 +2,7 @@ import { useState } from 'react'
 import EmoteButtons from './subs/EmoteButtons'
 import QuickTags from './subs/QuickTags'
 import Tag from './subs/Tag'
+import ActionButtons from './subs/ActionButtons';
 
 export default function Editor() {
     const [tags, setTags] = useState<string[]>([]);
@@ -15,6 +16,7 @@ export default function Editor() {
             </textarea>
             <QuickTags setTags={setTags}/>
             <EmoteButtons />
+            <ActionButtons />
         </form>
         
     </div>
