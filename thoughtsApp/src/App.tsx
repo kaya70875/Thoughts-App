@@ -4,7 +4,7 @@ import './index.css'
 
 function App() {
   return (
-    <div className="bg-slate-400 w-full h-screen flex">
+    <div className="bg-background w-full h-screen flex">
       <Editor />
     </div>
   )

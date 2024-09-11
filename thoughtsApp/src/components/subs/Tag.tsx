@@ -25,7 +25,7 @@ export default function Tag({tags, setTags}: {tags: string[], setTags: React.Dis
     <div className="w-2/4">
       <input
         type="text"
-        className="bg-transparent border-none outline-none p-2 placeholder-black"
+        className="bg-background border-none outline-none p-2 placeholder-textColor"
         placeholder="Tags..."
         ref={inputRef}
       />
@@ -34,7 +34,7 @@ export default function Tag({tags, setTags}: {tags: string[], setTags: React.Dis
         {tags.map((tag, index) => (
           <div
             key={index}
-            className="bg-white rounded-full p-2 flex justify-center items-center gap-1"
+            className="bg-primaryButton text-textColor rounded-full p-2 flex justify-center items-center gap-1"
           >
             {tag}
             <button onClick={handleRemoveTag}>
