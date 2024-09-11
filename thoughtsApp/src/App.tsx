@@ -1,12 +1,18 @@
 import './App.css'
 import Editor from './components/Editor'
+import History from './components/History'
+import { FormProvider } from './context/FormContext'
 import './index.css'
 
 function App() {
   return (
-    <div className="bg-background w-full h-screen flex">
-      <Editor />
-    </div>
+    <FormProvider>
+      <div className="bg-background w-full h-screen flex">
+        <Editor />
+        <History />
+      </div>
+    </FormProvider>
+    
   )
 }
 

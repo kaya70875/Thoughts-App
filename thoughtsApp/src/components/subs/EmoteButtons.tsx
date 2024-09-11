@@ -1,10 +1,15 @@
 import useDynamicImport from "../../hooks/useDynamicImport";
 
-export default function EmoteButtons() {
+export default function EmoteButtons({emote, setEmote} : {emote: string, setEmote: (emote: string) => void}) {
 
-  const emotes = ['happy' , 'less-happy' , 'neutral' , 'sad' , 'very-sad'];
+  const emotesList = ['happy' , 'less-happy' , 'neutral' , 'sad' , 'very-sad'];
 
-  const {module , error} = useDynamicImport(emotes);
+  const {module , error} = useDynamicImport(emotesList);
+
+  const handleEmotes = (emoteImage: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setEmote(emoteImage);
+  };
 
   return (
     <div>
@@ -14,10 +19,11 @@ export default function EmoteButtons() {
         <div className="flex gap-6 flex-wrap font-semibold">
           {module.map((emoteImage, index) => (
             <button
-              key={emotes[index]}
+              key={emotesList[index]}
               className="flex items-center justify-center text-center w-14 h-14 rounded-full"
+              onClick={handleEmotes(emotesList[index])}
             >
-              <img src={emoteImage} alt={emotes[index]} />
+              <img src={emoteImage} alt={emotesList[index]} />
             </button>
           ))}
         </div>

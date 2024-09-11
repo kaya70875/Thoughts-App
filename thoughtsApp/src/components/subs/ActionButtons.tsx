@@ -1,11 +1,10 @@
-import React, { act } from 'react'
 import useDynamicImport from '../../hooks/useDynamicImport'
 
 export default function ActionButtons() {
     const actions = ['love' , 'dizzy' , 'devil' , 'angry' , 'sick']
     const {module : extraEmotes , error} = useDynamicImport(actions);
   return (
-    <div>
+    <div className='flex items-end'>
       {error && <p>Error loading emotes</p>}
       <div className="flex flex-col gap-4 mt-6 w-96">
         <h1 className="font-bold text-lg text-textColor">Extra Icons</h1>
@@ -20,6 +19,7 @@ export default function ActionButtons() {
           ))}
         </div>
       </div>
+      <button type='submit' className='w-12 text-textColor mb-3 ml-3'>Submit</button>
     </div>
   )
 }
