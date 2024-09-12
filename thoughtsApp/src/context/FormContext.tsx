@@ -1,6 +1,5 @@
 // FormContext.tsx
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-
 interface FormState {
   emote: string;
   text?: string;
@@ -17,9 +16,14 @@ interface FormContextType {
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
+function initializeStorage() : FormState[] {
+  const formObject = localStorage.getItem('form');
+  return formObject ? JSON.parse(formObject) : [];
+}
+
 export const FormProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [form, setFormState] = useState<FormState>({'emote': ''});
-  const [submittedForms , setSubmittedForms] = useState<FormState[]>([]);
+  const [submittedForms , setSubmittedForms] = useState<FormState[]>(initializeStorage);
 
   const setForm = (newFormState: Partial<FormState>) => {
     setFormState(prevState => ({ ...prevState, ...newFormState }));

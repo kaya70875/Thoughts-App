@@ -6,6 +6,7 @@ export default function History() {
 
   const handleRemove = (index: number) => {
     setSubmittedForms(prevForms => prevForms.filter((_, i) => i !== index));
+    localStorage.removeItem('form');
   }
 
   return (

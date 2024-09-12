@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import EmoteButtons from './subs/EmoteButtons'
 import QuickTags from './subs/QuickTags'
 import Tag from './subs/Tag'
@@ -18,7 +18,7 @@ export default function Editor() {
     const [text, setText] = useState<string>('');
     const [actions , setActions] = useState<string[]>([]);
 
-    const {setForm , setSubmittedForms} = useForm();
+    const {setForm , setSubmittedForms , submittedForms} = useForm();
 
     const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       e.preventDefault();
@@ -37,6 +37,10 @@ export default function Editor() {
       setTags([]);
       setActions([]);
     }
+
+    useEffect(() => {
+      localStorage.setItem('form' , JSON.stringify(submittedForms));
+    } , [submittedForms])
 
   return (
     <div className='w-5/12 h-screen p-12'>
