@@ -1,13 +1,16 @@
+import { useState } from "react";
 import useDynamicImport from "../../hooks/useDynamicImport";
 
-export default function EmoteButtons({emote, setEmote} : {emote: string, setEmote: (emote: string) => void}) {
+export default function EmoteButtons({ emote, setEmote }: { emote: string; setEmote: (emote: string) => void }) {
+  const emotesList = ['happy', 'less-happy', 'neutral', 'sad', 'very-sad'];
 
-  const emotesList = ['happy' , 'less-happy' , 'neutral' , 'sad' , 'very-sad'];
+  const { module, error } = useDynamicImport(emotesList);
 
-  const {module , error} = useDynamicImport(emotesList);
+  const [activeEmote, setActiveEmote] = useState<string | null>(null);
 
   const handleEmotes = (emoteImage: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setActiveEmote(emoteImage);
     setEmote(emoteImage);
   };
 
@@ -20,8 +23,10 @@ export default function EmoteButtons({emote, setEmote} : {emote: string, setEmot
           {module.map((emoteImage, index) => (
             <button
               key={emotesList[index]}
-              className="flex items-center justify-center text-center w-14 h-14 rounded-full"
+              className={`emote__button flex items-center justify-center text-center w-14 h-14 rounded-full 
+                ${activeEmote === emotesList[index] ? 'active' : ''}`} // Add active class only for the selected emote
               onClick={handleEmotes(emotesList[index])}
+              type="button"
             >
               <img src={emoteImage} alt={emotesList[index]} />
             </button>

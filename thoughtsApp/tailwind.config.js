@@ -6,13 +6,14 @@ export default {
   ],
   theme: {
     colors : {
-      background : '#F3ECE3',
-      textArea : '#EDE7DD',
-      primaryButton : '#F4A261',
-      tag : '#2A9D8F',
-      buttonHover : '#E76F51',
-      textColor : '#264653',
-      primaryBorder : '#A8DADC',
+      background : 'var(--background)',
+      textArea : 'var(--textArea)',
+      primaryButton : 'var(--primaryButton)',
+      tag : 'var(--tag)',
+      buttonHover : 'var(--buttonHover)',
+      textColor : 'var(--textColor)',
+      primaryBorder : 'var(--primaryBorder)',
+      emoteHoverColor : 'var(--emoteHoverColor)',
     }
   },
   plugins: [],

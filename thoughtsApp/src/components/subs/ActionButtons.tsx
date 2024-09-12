@@ -1,21 +1,22 @@
-import useDynamicImport from '../../hooks/useDynamicImport'
+import useDynamicImport from "../../hooks/useDynamicImport";
 
 interface ActionButtonProps {
-  setActions : React.Dispatch<React.SetStateAction<string[]>>;
+  setActions: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function ActionButtons({setActions} : ActionButtonProps) {
-    const actions = ['love' , 'dizzy' , 'devil' , 'angry' , 'sick']
+export default function ActionButtons({ setActions }: ActionButtonProps) {
+  const actions = ["love", "dizzy", "devil", "angry", "sick"];
 
-    const {module : extraEmotes , error} = useDynamicImport(actions);
+  const { module: extraEmotes, error } = useDynamicImport(actions);
 
-    const handleActions = (index : string) => (e : React.MouseEvent<HTMLButtonElement>) => {
+  const handleActions =
+    (index: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      setActions(prev => [...prev , index]);
-
-    }
+      (e.currentTarget as HTMLButtonElement).classList.toggle('active');
+      setActions((prev) => [...prev, index]);
+    };
   return (
-    <div className='flex items-end'>
+    <div className="flex items-end justify-between mr-6">
       {error && <p>Error loading emotes</p>}
       <div className="flex flex-col gap-4 mt-6 w-96">
         <h1 className="font-bold text-lg text-textColor">Extra Icons</h1>
@@ -23,16 +24,21 @@ export default function ActionButtons({setActions} : ActionButtonProps) {
           {extraEmotes.map((emoteImage, index) => (
             <button
               key={actions[index]}
-              className="flex items-center justify-center text-center w-14 h-14 rounded-full"
+              className="emote__button flex items-center justify-center text-center w-14 h-14 rounded-full"
               onClick={handleActions(actions[index])}
-              type='button'
+              type="button"
             >
               <img src={emoteImage} alt={actions[index]} />
             </button>
           ))}
         </div>
       </div>
-      <button type='submit' className='w-12 text-textColor mb-3 ml-3'>Submit</button>
+      <button
+        type="submit"
+        className="primary__button w-20 p-2"
+      >
+        Submit
+      </button>{" "}
     </div>
-  )
+  );
 }

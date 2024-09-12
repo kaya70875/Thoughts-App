@@ -63,7 +63,7 @@ export default function HistoryCard({ form }: HistoryCardProps) {
           {form.tags.map((tag, index) => (
             <button
               key={index}
-              className="bg-tag w-14 p-1 text-textColor font-semibold text-sm"
+              className="bg-tag w-14 p-1 text-textArea font-semibold text-sm"
             >
               {tag}
             </button>
@@ -73,7 +73,7 @@ export default function HistoryCard({ form }: HistoryCardProps) {
 
       {form.text && form.text.length > 0 &&
         (
-          <div className="content__section w-full h-16 flex items-center">
+          <div className="content__section w-full h-16 flex items-center text-textColor font-medium">
             {form.text}
           </div>
         )}

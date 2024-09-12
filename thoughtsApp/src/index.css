@@ -7,3 +7,37 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+:root{
+    --background : #F3ECE3;
+    --textArea : #EDE7DD;
+    --primaryButton : #F4A261;
+    --tag : #2A9D8F;
+    --buttonHover : #E76F51;
+    --textColor : #1C1C1C;
+    --primaryBorder : #A8DADC;
+    --emoteHoverColor : #E0C74F;
+}
+
+.primary__button{
+    color : var(--textColor);
+    background: var(--primaryButton);
+    transition: 200ms;
+}
+
+.primary__button:hover {
+    background: var(--buttonHover);
+}
+
+.emote__button{
+    transition: 200ms;
+}
+.emote__button:hover {
+    background: var(--buttonHover);
+    padding: 0.25rem;
+}
+
+.primary__button.active , .emote__button.active{
+    background: var(--buttonHover);
+    padding: 0.25rem;
+}

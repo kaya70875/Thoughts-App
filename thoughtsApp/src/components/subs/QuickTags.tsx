@@ -40,7 +40,7 @@ export default function QuickTags({setTags} : {setTags: React.Dispatch<React.Set
         {quickTags.map((tag) => (
           <button
             key={tag.id}
-            className={`${tag.color} px-4 py-2 cursor-pointer w-24 text-textColor`}
+            className={`primary__button ${tag.color} px-4 py-2 cursor-pointer w-24`}
             onClick={(e) => {
               e.preventDefault();
               setTags((prev) => [...prev, tag.name]);
