@@ -1,63 +1,75 @@
-import { useEffect, useState } from 'react'
-import EmoteButtons from './subs/EmoteButtons'
-import QuickTags from './subs/QuickTags'
-import Tag from './subs/Tag'
-import ActionButtons from './subs/ActionButtons';
-import { useForm } from '../context/FormContext';
+import { useEffect, useState } from "react";
+import EmoteButtons from "./subs/EmoteButtons";
+import QuickTags from "./subs/QuickTags";
+import Tag from "./subs/Tag";
+import ActionButtons from "./subs/ActionButtons";
+import { useForm } from "../context/FormContext";
 
 interface FormState {
   emote: string;
   text?: string;
   tags?: string[];
   actions?: string[];
+  date: string;
 }
 
 export default function Editor() {
-    const [tags, setTags] = useState<string[]>([]);
-    const [emote, setEmote] = useState('');
-    const [text, setText] = useState<string>('');
-    const [actions , setActions] = useState<string[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
+  const [emote, setEmote] = useState("");
+  const [text, setText] = useState<string>("");
+  const [actions, setActions] = useState<string[]>([]);
 
-    const {setForm , setSubmittedForms , submittedForms} = useForm();
+  const { setForm, setSubmittedForms, submittedForms } = useForm();
 
-    const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      e.preventDefault();
-        setText(e.target.value);
-    }
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    setText(e.target.value);
+  };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const newForm = {emote , text , tags , actions}
-      setForm(newForm);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      setSubmittedForms((prevForms : FormState[]) => [...prevForms, newForm]);
+    //Form elements
+    const newForm = {
+      emote,
+      text,
+      tags,
+      actions,
+      date: new Date().toDateString(),
+    };
+    setForm(newForm);
 
-      setEmote('');
-      setText('');
-      setTags([]);
-      setActions([]);
-    }
+    setSubmittedForms((prevForms: FormState[]) => [...prevForms, newForm]);
 
-    useEffect(() => {
-      localStorage.setItem('form' , JSON.stringify(submittedForms));
-    } , [submittedForms])
+    setEmote("");
+    setText("");
+    setTags([]);
+    setActions([]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("form", JSON.stringify(submittedForms));
+  }, [submittedForms]);
 
   return (
-    <div className='w-5/12 h-screen p-12'>
-        <form className='flex flex-col gap-2 h-full overflow-hidden' onSubmit={handleSubmit}>
-            <Tag tags={tags} setTags={setTags} />
-            <textarea name="text-area" id="txt" className='w-full min-h-80 p-2 border-2 border-primaryBorder outline-none' placeholder='Write Your Thoughts...' 
-            value={text}
-            onChange={handleTextChange}
-            >
-            
-      
-            </textarea>
-            <QuickTags setTags={setTags}/>
-            <EmoteButtons emote={emote} setEmote={setEmote}/>
-            <ActionButtons />
-        </form>
-        
+    <div className="w-5/12 h-screen p-12">
+      <form
+        className="flex flex-col gap-2 h-full overflow-hidden"
+        onSubmit={handleSubmit}
+      >
+        <Tag tags={tags} setTags={setTags} />
+        <textarea
+          name="text-area"
+          id="txt"
+          className="w-full min-h-80 p-2 border-2 border-primaryBorder outline-none"
+          placeholder="Write Your Thoughts..."
+          value={text}
+          onChange={handleTextChange}
+        ></textarea>
+        <QuickTags setTags={setTags} />
+        <EmoteButtons emote={emote} setEmote={setEmote} />
+        <ActionButtons setActions={setActions}/>
+      </form>
     </div>
-  )
+  );
 }

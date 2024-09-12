@@ -1,8 +1,19 @@
 import useDynamicImport from '../../hooks/useDynamicImport'
 
-export default function ActionButtons() {
+interface ActionButtonProps {
+  setActions : React.Dispatch<React.SetStateAction<string[]>>;
+}
+
+export default function ActionButtons({setActions} : ActionButtonProps) {
     const actions = ['love' , 'dizzy' , 'devil' , 'angry' , 'sick']
+
     const {module : extraEmotes , error} = useDynamicImport(actions);
+
+    const handleActions = (index : string) => (e : React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setActions(prev => [...prev , index]);
+
+    }
   return (
     <div className='flex items-end'>
       {error && <p>Error loading emotes</p>}
@@ -13,6 +24,8 @@ export default function ActionButtons() {
             <button
               key={actions[index]}
               className="flex items-center justify-center text-center w-14 h-14 rounded-full"
+              onClick={handleActions(actions[index])}
+              type='button'
             >
               <img src={emoteImage} alt={actions[index]} />
             </button>

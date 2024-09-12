@@ -5,6 +5,7 @@ interface FormState {
   text?: string;
   tags?: string[];
   actions?: string[];
+  date : string;
 }
 
 interface FormContextType {
@@ -22,7 +23,7 @@ function initializeStorage() : FormState[] {
 }
 
 export const FormProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [form, setFormState] = useState<FormState>({'emote': ''});
+  const [form, setFormState] = useState<FormState>({'emote': '' , 'date' : ''});
   const [submittedForms , setSubmittedForms] = useState<FormState[]>(initializeStorage);
 
   const setForm = (newFormState: Partial<FormState>) => {

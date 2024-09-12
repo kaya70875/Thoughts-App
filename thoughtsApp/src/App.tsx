@@ -7,7 +7,7 @@ import './index.css'
 function App() {
   return (
     <FormProvider>
-      <div className="bg-background w-full h-screen flex">
+      <div className="bg-background w-screen h-screen flex">
         <Editor />
         <History />
       </div>
