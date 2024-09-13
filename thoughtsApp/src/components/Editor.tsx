@@ -19,7 +19,7 @@ export default function Editor() {
   const [text, setText] = useState<string>("");
   const [actions, setActions] = useState<string[]>([]);
 
-  const { setForm, setSubmittedForms, submittedForms } = useForm();
+  const { setForm, setSubmittedForms, submittedForms, isSubmitted, setIsSubmitted } = useForm();
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault();
@@ -28,8 +28,8 @@ export default function Editor() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsSubmitted(true);
 
-    //Form elements
     const newForm = {
       emote,
       text,
@@ -41,10 +41,15 @@ export default function Editor() {
 
     setSubmittedForms((prevForms: FormState[]) => [...prevForms, newForm]);
 
+    // Reset the form fields
     setEmote("");
     setText("");
     setTags([]);
     setActions([]);
+
+    if(isSubmitted) {
+      setIsSubmitted(false);
+    }
   };
 
   useEffect(() => {
@@ -53,10 +58,7 @@ export default function Editor() {
 
   return (
     <div className="w-5/12 h-screen p-12">
-      <form
-        className="flex flex-col gap-2 h-full overflow-hidden"
-        onSubmit={handleSubmit}
-      >
+      <form className="flex flex-col gap-2 h-full overflow-hidden" onSubmit={handleSubmit}>
         <Tag tags={tags} setTags={setTags} />
         <textarea
           name="text-area"
@@ -68,7 +70,7 @@ export default function Editor() {
         ></textarea>
         <QuickTags setTags={setTags} />
         <EmoteButtons emote={emote} setEmote={setEmote} />
-        <ActionButtons setActions={setActions}/>
+        <ActionButtons setActions={setActions} />
       </form>
     </div>
   );

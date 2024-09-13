@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import useDynamicImport from "../../hooks/useDynamicImport";
 
 interface ActionButtonProps {
@@ -6,6 +7,7 @@ interface ActionButtonProps {
 
 export default function ActionButtons({ setActions }: ActionButtonProps) {
   const actions = ["love", "dizzy", "devil", "angry", "sick"];
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { module: extraEmotes, error } = useDynamicImport(actions);
 
@@ -13,8 +15,14 @@ export default function ActionButtons({ setActions }: ActionButtonProps) {
     (index: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       (e.currentTarget as HTMLButtonElement).classList.toggle('active');
-      setActions((prev) => [...prev, index]);
+
+      if(e.currentTarget.classList.contains('active')) {
+        setActions((prev) => [...prev, index]);
+      } else {
+        setActions((prev) => prev.filter((action) => action !== index));
+      }
     };
+
   return (
     <div className="flex items-end justify-between mr-6">
       {error && <p>Error loading emotes</p>}
@@ -24,6 +32,7 @@ export default function ActionButtons({ setActions }: ActionButtonProps) {
           {extraEmotes.map((emoteImage, index) => (
             <button
               key={actions[index]}
+              ref={buttonRef}
               className="emote__button flex items-center justify-center text-center w-14 h-14 rounded-full"
               onClick={handleActions(actions[index])}
               type="button"
@@ -36,6 +45,10 @@ export default function ActionButtons({ setActions }: ActionButtonProps) {
       <button
         type="submit"
         className="primary__button w-20 p-2"
+        onClick={() => {
+          buttonRef.current?.classList.remove("active");
+          {/* We don't have to use useForm and useEffect because submit form itself is here */}
+        }}
       >
         Submit
       </button>{" "}

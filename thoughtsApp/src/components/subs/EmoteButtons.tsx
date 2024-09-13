@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useDynamicImport from "../../hooks/useDynamicImport";
+import { useForm } from "../../context/FormContext";
 
 export default function EmoteButtons({ emote, setEmote }: { emote: string; setEmote: (emote: string) => void }) {
   const emotesList = ['happy', 'less-happy', 'neutral', 'sad', 'very-sad'];
 
   const { module, error } = useDynamicImport(emotesList);
+  const { isSubmitted } = useForm();
+
+  const emoteRef = useRef<HTMLButtonElement>(null);
 
   const [activeEmote, setActiveEmote] = useState<string | null>(null);
 
@@ -13,6 +17,14 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
     setActiveEmote(emoteImage);
     setEmote(emoteImage);
   };
+
+  // Reset the active emote when the form is submitted
+  useEffect(() => {
+    if (isSubmitted) {
+      setActiveEmote(null);
+      setEmote(''); 
+    }
+  }, [isSubmitted, emote]);
 
   return (
     <div>
@@ -23,10 +35,10 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
           {module.map((emoteImage, index) => (
             <button
               key={emotesList[index]}
-              className={`emote__button flex items-center justify-center text-center w-14 h-14 rounded-full 
-                ${activeEmote === emotesList[index] ? 'active' : ''}`} // Add active class only for the selected emote
+              className={`emote__button flex items-center justify-center text-center w-14 h-14 rounded-full ${activeEmote === emotesList[index] ? 'active' : ''}`}
               onClick={handleEmotes(emotesList[index])}
               type="button"
+              ref={emoteRef}
             >
               <img src={emoteImage} alt={emotesList[index]} />
             </button>

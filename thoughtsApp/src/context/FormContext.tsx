@@ -13,6 +13,8 @@ interface FormContextType {
   setForm: (newFormState: Partial<FormState>) => void;
   submittedForms: FormState[];
   setSubmittedForms: React.Dispatch<React.SetStateAction<FormState[]>>;
+  isSubmitted: boolean;
+  setIsSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -25,13 +27,14 @@ function initializeStorage() : FormState[] {
 export const FormProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [form, setFormState] = useState<FormState>({'emote': '' , 'date' : ''});
   const [submittedForms , setSubmittedForms] = useState<FormState[]>(initializeStorage);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const setForm = (newFormState: Partial<FormState>) => {
     setFormState(prevState => ({ ...prevState, ...newFormState }));
   };
 
   return (
-    <FormContext.Provider value={{ form, setForm , submittedForms , setSubmittedForms}}>
+    <FormContext.Provider value={{ form, setForm , submittedForms , setSubmittedForms , isSubmitted, setIsSubmitted}}>
       {children}
     </FormContext.Provider>
   );
