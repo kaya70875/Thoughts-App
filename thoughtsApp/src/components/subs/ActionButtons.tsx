@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import useDynamicImport from "../../hooks/useDynamicImport";
+import SubmitButton from "../SubmitButton";
 
 interface ActionButtonProps {
   setActions: React.Dispatch<React.SetStateAction<string[]>>;
@@ -12,14 +13,14 @@ export default function ActionButtons({ setActions }: ActionButtonProps) {
   const { module: extraEmotes, error } = useDynamicImport(actions);
 
   const handleActions =
-    (index: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
+    (currentEmote: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       (e.currentTarget as HTMLButtonElement).classList.toggle('active');
 
       if(e.currentTarget.classList.contains('active')) {
-        setActions((prev) => [...prev, index]);
+        setActions((prev) => [...prev, currentEmote]);
       } else {
-        setActions((prev) => prev.filter((action) => action !== index));
+        setActions((prev) => prev.filter((action) => action !== currentEmote));
       }
     };
 
@@ -42,16 +43,7 @@ export default function ActionButtons({ setActions }: ActionButtonProps) {
           ))}
         </div>
       </div>
-      <button
-        type="submit"
-        className="primary__button w-20 p-2"
-        onClick={() => {
-          buttonRef.current?.classList.remove("active");
-          {/* We don't have to use useForm and useEffect because submit form itself is here */}
-        }}
-      >
-        Submit
-      </button>{" "}
+      <SubmitButton />
     </div>
   );
 }

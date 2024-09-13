@@ -28,27 +28,34 @@ export default function Editor() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
 
-    const newForm = {
-      emote,
-      text,
-      tags,
-      actions,
-      date: new Date().toDateString(),
-    };
-    setForm(newForm);
+    if(emote.length > 0) {
+      setIsSubmitted(true);
 
-    setSubmittedForms((prevForms: FormState[]) => [...prevForms, newForm]);
+      const newForm = {
+        emote,
+        text,
+        tags,
+        actions,
+        date: new Date().toDateString(),
+      };
+      setForm(newForm);
+  
+      setSubmittedForms((prevForms: FormState[]) => [...prevForms, newForm]);
+  
+      // Reset the form fields
+      setEmote("");
+      setText("");
+      setTags([]);
+      setActions([]);
+  
+      if(isSubmitted) {
+        setIsSubmitted(false);
+      }
+    }
 
-    // Reset the form fields
-    setEmote("");
-    setText("");
-    setTags([]);
-    setActions([]);
-
-    if(isSubmitted) {
-      setIsSubmitted(false);
+    else{
+      alert("Please select an emote");
     }
   };
 

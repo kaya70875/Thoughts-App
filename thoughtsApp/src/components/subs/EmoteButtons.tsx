@@ -1,12 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import useDynamicImport from "../../hooks/useDynamicImport";
-import { useForm } from "../../context/FormContext";
 
 export default function EmoteButtons({ emote, setEmote }: { emote: string; setEmote: (emote: string) => void }) {
   const emotesList = ['happy', 'less-happy', 'neutral', 'sad', 'very-sad'];
 
   const { module, error } = useDynamicImport(emotesList);
-  const { isSubmitted } = useForm();
 
   const emoteRef = useRef<HTMLButtonElement>(null);
 
@@ -18,13 +16,7 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
     setEmote(emoteImage);
   };
 
-  // Reset the active emote when the form is submitted
-  useEffect(() => {
-    if (isSubmitted) {
-      setActiveEmote(null);
-      setEmote(''); 
-    }
-  }, [isSubmitted, emote]);
+
 
   return (
     <div>
