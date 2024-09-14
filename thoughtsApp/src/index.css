@@ -41,3 +41,9 @@
     background: var(--buttonHover);
     padding: 0.25rem;
 }
+
+@layer components {
+    .emoji-styles {
+        @apply w-14 2xl:w-12 xl:w-10 lg:w-9 h-14 2xl:h-12 xl:h-10 lg:h-9 rounded-full;
+    }
+}

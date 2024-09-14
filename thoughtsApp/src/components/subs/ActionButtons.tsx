@@ -34,7 +34,7 @@ export default function ActionButtons({ setActions }: ActionButtonProps) {
             <button
               key={actions[index]}
               ref={buttonRef}
-              className="emote__button flex items-center justify-center text-center w-14 h-14 rounded-full"
+              className="emote__button flex items-center justify-center text-center emoji-styles"
               onClick={handleActions(actions[index])}
               type="button"
             >

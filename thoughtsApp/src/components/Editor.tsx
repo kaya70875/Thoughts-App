@@ -64,13 +64,13 @@ export default function Editor() {
   }, [submittedForms]);
 
   return (
-    <div className="w-5/12 h-screen p-12">
+    <div className="w-5/12 h-full pl-12 pt-12">
       <form className="flex flex-col gap-2 h-full overflow-hidden" onSubmit={handleSubmit}>
         <Tag tags={tags} setTags={setTags} />
         <textarea
           name="text-area"
           id="txt"
-          className="w-full min-h-80 p-2 border-2 border-primaryBorder outline-none"
+          className="w-full min-h-80 2xl:min-h-40 xl:min-h-32 p-2 border-2 border-primaryBorder outline-none"
           placeholder="Write Your Thoughts..."
           value={text}
           onChange={handleTextChange}

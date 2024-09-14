@@ -27,7 +27,7 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
           {module.map((emoteImage, index) => (
             <button
               key={emotesList[index]}
-              className={`emote__button flex items-center justify-center text-center w-14 h-14 rounded-full ${activeEmote === emotesList[index] ? 'active' : ''}`}
+              className={`emote__button flex items-center justify-center text-center emoji-styles rounded-full ${activeEmote === emotesList[index] ? 'active' : ''}`}
               onClick={handleEmotes(emotesList[index])}
               type="button"
               ref={emoteRef}
