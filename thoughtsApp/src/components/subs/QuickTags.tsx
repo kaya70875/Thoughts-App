@@ -34,7 +34,7 @@ export default function QuickTags({setTags} : {setTags: React.Dispatch<React.Set
   ]
 
   return (
-    <div className="flex flex-col gap-4 mt-6 w-96">
+    <div className="flex flex-col gap-4 mt-6 max-w-96">
       <h1 className="font-bold text-lg text-textColor">Quick Tags</h1>
       <div className="flex gap-6 flex-wrap font-semibold">
         {quickTags.map((tag) => (

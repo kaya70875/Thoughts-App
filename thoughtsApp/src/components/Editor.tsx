@@ -55,7 +55,7 @@ export default function Editor() {
     }
 
     else{
-      alert("Please select an emote");
+      alert("Please Select An Emote");
     }
   };
 

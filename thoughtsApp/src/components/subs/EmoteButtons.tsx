@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useDynamicImport from "../../hooks/useDynamicImport";
 
 export default function EmoteButtons({ emote, setEmote }: { emote: string; setEmote: (emote: string) => void }) {
@@ -9,6 +9,8 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
   const emoteRef = useRef<HTMLButtonElement>(null);
 
   const [activeEmote, setActiveEmote] = useState<string | null>(null);
+  const [shake, setShake] = useState(false);
+
 
   const handleEmotes = (emoteImage: string) => (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -16,10 +18,19 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
     setEmote(emoteImage);
   };
 
+  useEffect(() => {
+    if (!activeEmote) {
+      const shakeInterval = setInterval(() => {
+        setShake(true);
+        setTimeout(() => setShake(false), 500);
+      }, 3000);
 
+      return () => clearInterval(shakeInterval);
+    }
+  }, [activeEmote]);
 
   return (
-    <div>
+    <div className="flex flex-wrap">
       {error && <p>Error loading emotes</p>}
       <div className="flex flex-col gap-4 mt-6 w-96">
         <h1 className="font-bold text-lg text-textColor">Emotes</h1>
@@ -27,7 +38,8 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
           {module.map((emoteImage, index) => (
             <button
               key={emotesList[index]}
-              className={`emote__button flex items-center justify-center text-center emoji-styles rounded-full ${activeEmote === emotesList[index] ? 'active' : ''}`}
+              className={`emote__button flex items-center justify-center text-center emoji-styles rounded-full ${activeEmote === emotesList[index] ? 'active' : ''}
+              ${!activeEmote && shake ? 'shake-animation' : ''}`}
               onClick={handleEmotes(emotesList[index])}
               type="button"
               ref={emoteRef}
