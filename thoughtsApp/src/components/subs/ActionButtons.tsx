@@ -25,11 +25,11 @@ export default function ActionButtons({ setActions }: ActionButtonProps) {
     };
 
   return (
-    <div className="flex items-end justify-between mr-6">
+    <div className="flex items-end justify-between mr-6 xl:mr-0">
       {error && <p>Error loading emotes</p>}
       <div className="flex flex-col gap-4 mt-6 w-96">
         <h1 className="font-bold text-lg text-textColor">Extra Icons</h1>
-        <div className="flex gap-6 flex-wrap font-semibold">
+        <div className="flex gap-6 flex-wrap xl:flex-nowrap font-semibold">
           {extraEmotes.map((emoteImage, index) => (
             <button
               key={actions[index]}

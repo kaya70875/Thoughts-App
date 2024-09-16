@@ -73,7 +73,7 @@ export default function HistoryCard({ form }: HistoryCardProps) {
 
       {form.text && form.text.length > 0 &&
         (
-          <div className="content__section w-full h-16 flex items-center text-textColor font-medium">
+          <div className="content__section w-full h-16 2xl:h-14 xl:h-12 lg:h-10 md:h-8 flex items-center text-textColor font-medium">
             {form.text}
           </div>
         )}

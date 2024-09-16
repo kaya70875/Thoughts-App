@@ -23,24 +23,24 @@ export default function QuickTags({setTags} : {setTags: React.Dispatch<React.Set
     },
     {
       id: 5,
-      name: "Happy",
+      name: "Love",
       color: "bg-primaryButton",
     },
     {
       id: 6,
-      name: "Sad",
+      name: "Sorry",
       color: "bg-primaryButton",
     },
   ]
 
   return (
-    <div className="flex flex-col gap-4 mt-6 max-w-96">
+    <div className="flex flex-col gap-4 mt-6 max-w-96 xl:max-w-80">
       <h1 className="font-bold text-lg text-textColor">Quick Tags</h1>
       <div className="flex gap-6 flex-wrap font-semibold">
         {quickTags.map((tag) => (
           <button
             key={tag.id}
-            className={`primary__button ${tag.color} px-4 py-2 cursor-pointer w-24`}
+            className={`primary__button ${tag.color} px-4 py-2 cursor-pointer button-styles flex items-center justify-center`}
             onClick={(e) => {
               e.preventDefault();
               setTags((prev) => [...prev, tag.name]);

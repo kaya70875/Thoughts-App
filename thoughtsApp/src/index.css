@@ -46,6 +46,10 @@
     .emoji-styles {
         @apply w-14 2xl:w-12 xl:w-10 lg:w-9 h-14 2xl:h-12 xl:h-10 lg:h-9 rounded-full;
     }
+
+    .button-styles {
+        @apply w-24 2xl:w-20 xl:w-16 lg:w-14 h-12 2xl:h-10 xl:h-9;
+    }
 }
 
 @keyframes shake {
