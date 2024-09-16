@@ -34,7 +34,7 @@ export default function Tag({tags, setTags}: {tags: string[], setTags: React.Dis
         {tags.map((tag, index) => (
           <div
             key={index}
-            className="primary__button rounded-full p-2 flex justify-center items-center gap-1"
+            className="primary__button rounded-full p-2 flex justify-center items-center gap-1 button-styles"
           >
             {tag}
             <button onClick={handleRemoveTag}>

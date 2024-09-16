@@ -63,7 +63,7 @@ export default function HistoryCard({ form }: HistoryCardProps) {
           {form.tags.map((tag, index) => (
             <button
               key={index}
-              className="bg-tag w-14 p-1 text-textArea font-semibold text-sm"
+              className="bg-tag flex items-center justify-center w-14 lg:w-10 h-8 lg:h-5 p-1 text-textArea font-semibold text-sm lg:text-xs"
             >
               {tag}
             </button>
@@ -71,17 +71,29 @@ export default function HistoryCard({ form }: HistoryCardProps) {
         </div>
       )}
 
-      {form.text && form.text.length > 0 &&
-        (
-          <div className="content__section w-full h-16 2xl:h-14 xl:h-12 lg:h-10 md:h-8 flex items-center text-textColor font-medium">
+      {form.text && form.text.length > 0 && (
+        <div className="content__section xl:w-auto h-auto flex items-center">
+          <p className="text-textColor text-base lg:text-sm font-normal break-words w-80 lg:w-60">
             {form.text}
-          </div>
-        )}
+          </p>
+        </div>
+      )}
 
       <div className="emotes__section flex gap-2">
-        {emoteImg && <img src={emoteImg} alt={currentEmote} className="w-8" />}
+        {emoteImg && (
+          <img
+            src={emoteImg}
+            alt={currentEmote}
+            className="w-8 lg:w-6 h-8 lg:h-6"
+          />
+        )}
         {actionImgs.map((img, index) => (
-          <img key={index} src={img} alt={`action-${index}`} className="w-8" />
+          <img
+            key={index}
+            src={img}
+            alt={`action-${index}`}
+            className="w-8 lg:w-6 h-8 lg:h-6"
+          />
         ))}
       </div>
     </div>

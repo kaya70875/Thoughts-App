@@ -8,7 +8,7 @@ import '../src/css/ScrollBar.css'
 function App() {
   return (
     <FormProvider>
-      <div className="bg-background w-screen h-screen flex overflow-hidden">
+      <div className="bg-background w-screen h-screen flex">
         <Editor />
         <div className='flex-1 overflow-auto overflow-x-hidden smooth-scroll'>
           <History />

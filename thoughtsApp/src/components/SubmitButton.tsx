@@ -11,7 +11,7 @@ export default function SubmitButton() {
   return (
     <button
       type="submit"
-      className="primary__button w-20 p-2"
+      className="primary__button flex items-center justify-center text-base xl:text-sm w-20 xl:w-16 h-10 xl:h-8 p-2"
       onClick={handleSubmitButton}
     >
       Submit

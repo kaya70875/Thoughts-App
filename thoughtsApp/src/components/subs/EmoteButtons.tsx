@@ -33,8 +33,8 @@ export default function EmoteButtons({ emote, setEmote }: { emote: string; setEm
     <div className="flex flex-wrap">
       {error && <p>Error loading emotes</p>}
       <div className="flex flex-col gap-4 mt-6 w-96">
-        <h1 className="font-bold text-lg text-textColor">Emotes</h1>
-        <div className="flex gap-6 flex-wrap font-semibold">
+        <h1 className="font-bold text-lg lg:text-base sm:text-sm text-textColor">Emotes</h1>
+        <div className="flex gap-6 sm:gap-3 flex-wrap lg:flex-nowrap sm:grid grid-cols-3 font-semibold">
           {module.map((emoteImage, index) => (
             <button
               key={emotesList[index]}
