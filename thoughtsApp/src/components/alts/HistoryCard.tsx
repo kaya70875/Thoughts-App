@@ -59,7 +59,7 @@ export default function HistoryCard({ form }: HistoryCardProps) {
   return (
     <div className="w-full h-auto bg-textArea border-2 border-primaryBorder flex flex-col justify-between p-4 gap-4">
       {form.tags && form.tags.length > 0 && (
-        <div className="tag__section w-full flex gap-4">
+        <div className="tag__section w-auto flex flex-wrap gap-4">
           {form.tags.map((tag, index) => (
             <button
               key={index}
@@ -79,7 +79,7 @@ export default function HistoryCard({ form }: HistoryCardProps) {
         </div>
       )}
 
-      <div className="emotes__section flex gap-2">
+      <div className="emotes__section flex flex-wrap gap-2">
         {emoteImg && (
           <img
             src={emoteImg}
